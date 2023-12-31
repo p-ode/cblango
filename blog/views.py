@@ -9,6 +9,10 @@ from blog.forms import CommentForm
 import logging
 logger = logging.getLogger(__name__)
 
+def get_ip(request):
+  from django.http import HttpResponse
+  return HttpResponse(request.META['REMOTE_ADDR'])
+
 def index(request):
     posts = Post.objects.filter(published_at__lte=timezone.now())
     return render(request, "blog/index.html", {"posts": posts})
